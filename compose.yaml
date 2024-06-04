@@ -1,0 +1,40 @@
+services:
+  nextjs:
+    image: graduss/ella-web-site:latest
+    container_name: ella-live
+    restart: always
+    env_file:
+      - path: ../.env.ella-web
+        required: true
+    networks:
+      - live
+
+  cb-web-app:
+    image: graduss/cb-web-app:latest
+    container_name: ella-live
+    restart: always
+    env_file:
+      - path: ../.env.cb-web-app
+        required: true
+    networks:
+      - live
+
+  nginx:
+    image: nginx:latest
+    container_name: ndinx-server
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - nextjs
+      - cb-web-app
+    restart: always
+    networks:
+      - live
+
+networks:
+    live:
+      driver: bridge
