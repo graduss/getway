@@ -1,20 +1,20 @@
 services:
-  nextjs:
+  const-max:
     image: graduss/ella-web-site:latest
-    container_name: ella-live
+    container_name: const-max
     restart: always
     env_file:
-      - path: ../.env.ella-web
+      - path: ../.env.const-max
         required: true
     networks:
       - live
 
-  cb-web-app:
+  check-business:
     image: graduss/cb-web-app:latest
-    container_name: ella-live
+    container_name: check-business
     restart: always
     env_file:
-      - path: ../.env.cb-web-app
+      - path: ../.env.check-business
         required: true
     networks:
       - live
@@ -29,8 +29,8 @@ services:
       - "80:80"
       - "443:443"
     depends_on:
-      - nextjs
-      - cb-web-app
+      - const-max
+      - check-business
     restart: always
     networks:
       - live
