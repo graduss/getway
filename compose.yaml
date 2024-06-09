@@ -13,6 +13,8 @@ services:
     image: graduss/cb-web-app:latest
     container_name: check-business
     restart: always
+    volumes:
+      - ~/.well-known/acme-challenge:/app/public/.well-known/acme-challenge
     env_file:
       - path: ../.env.check-business
         required: true
