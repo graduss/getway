@@ -25,7 +25,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/ssl:/etc/nginx/ssl:ro
-      - ~/.well-known/acme-challenge:/usr/share/nginx/html:ro
+      - ./.well-known/acme-challenge:/usr/share/nginx/html:ro
     ports:
       - "80:80"
       - "443:443"
