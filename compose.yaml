@@ -13,8 +13,6 @@ services:
     image: graduss/cb-web-app:latest
     container_name: check-business
     restart: always
-    volumes:
-      - ~/.well-known/acme-challenge:/app/public/.well-known/acme-challenge
     env_file:
       - path: ../.env.check-business
         required: true
@@ -27,6 +25,7 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/ssl:/etc/nginx/ssl:ro
+      - ~/.well-known/acme-challenge:/usr/share/nginx/html:ro
     ports:
       - "80:80"
       - "443:443"
