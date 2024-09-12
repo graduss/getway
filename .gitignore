@@ -1,3 +1,4 @@
 nginx/ssl/*
 .pass
 .htpasswd
+.env
