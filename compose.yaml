@@ -4,17 +4,7 @@ services:
     container_name: const-max
     restart: always
     env_file:
-      - path: ../.env.const-max
-        required: true
-    networks:
-      - live
-
-  check-business:
-    image: graduss/cb-web-app:latest
-    container_name: check-business
-    restart: always
-    env_file:
-      - path: ../.env.check-business
+      - path: .env
         required: true
     networks:
       - live
@@ -25,15 +15,11 @@ services:
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d:ro
       - ./nginx/ssl/const-max.com:/etc/nginx/ssl/const-max.com:ro
-      - ~/letsencrypt:/etc/nginx/letsencrypt:ro
-      - ~/letsencrypt/.well-known/acme-challenge:/usr/share/nginx/html/.well-known/acme-challenge:ro
-      - ./nginx/.htpasswd:/etc/nginx/.htpasswd:ro
     ports:
       - "80:80"
       - "443:443"
     depends_on:
       - const-max
-      - check-business
     restart: always
     networks:
       - live
